@@ -12,6 +12,7 @@ hanoi numDiscs a b c =
   let aDiscs = [1..numDiscs]
       bDiscs = []
       cDiscs = []
+      pegDiscState = (aDiscs,bDiscs,cDiscs)
   in
     []
 
@@ -19,7 +20,7 @@ rots xs = init (zipWith (++) (tails xs) (inits xs))
 
 -- Data.List permutations:
 -- permutations "abc" == ["abc","bac","cba","bca","cab","acb"]
---mapOverMoves = map (tryPeg1toOtherPegs "A" "B" "C") ()
+mapOverMoves = map (tryPeg1toOtherPegs "A" "B" "C") [(([1,2,3],[],[]),[])]
 
 tryPeg1toOtherPegs :: Peg -> Peg -> Peg -> (PegDiscState, [Maybe Move]) -> [(PegDiscState, [Maybe Move])]
 tryPeg1toOtherPegs peg1 peg2 peg3  (pegState@(peg1Discs, peg2Discs, peg3Discs), movesTilNow@(Nothing:_)) = [(pegState ,movesTilNow)]
